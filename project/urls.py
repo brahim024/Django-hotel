@@ -14,8 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from . import settings
+from django.contrib.sitemaps.views import sitemap
+from myapp.sitemaps import PostSitemap       # site map
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+sitemaps={
+	'posts':PostSitemap,
+}
 
 urlpatterns = [
+    path('login/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('blog/',include('myapp.urls',namespace='blog')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+ 				name='django.contrib.sitemaps.views.sitemap'),
+    path('api-auth/', include('rest_framework.urls')),
+    path('login/',include('login.urls',namespace='login')),
+    
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
