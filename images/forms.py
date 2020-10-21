@@ -1,5 +1,5 @@
 from django import forms
-form .models import Image
+from .models import Image
 
 class ImageCreateForm(forms.ModelForm):
 	class Meta:
@@ -8,3 +8,12 @@ class ImageCreateForm(forms.ModelForm):
 		widgets={
 				'url':forms.HiddenInput,
 		}
+
+	def clean_url(self):
+		url=self.cleaned_data['url']
+		valid_extensions=['jpg','jpeg']
+		extensions=url.rsplit('.',1)[1].lower()
+		if extensionsnot in valid_extensions:
+			raise forms.ValidationError('the url does not'\
+										'match valid image extensions')
+		return url
