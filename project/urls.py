@@ -27,7 +27,7 @@ sitemaps={
 urlpatterns = [
     path('login/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    pqth('images/'include('images.urls',namespace='images')),
+    path('images/',include('images.urls',namespace='images')),
     path('blog/',include('myapp.urls',namespace='blog')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
  				name='django.contrib.sitemaps.views.sitemap'),

@@ -1,10 +1,10 @@
 from django.shortcuts import render ,redirect
- from django.comtrib.auth.decorators import login_required
- from django.contrib import messages
- from .forms import ImageCreateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import ImageCreateForm
 # Create your views here.
 @login_required
-def image_craete(request):
+def image_create(request):
 	if request.method=='POST':
 		# now form is sent 
 		form=ImageCreateForm(data=request.POST)

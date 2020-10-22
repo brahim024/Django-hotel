@@ -13,10 +13,10 @@ class ImageCreateForm(forms.ModelForm):
 		}
 
 	def clean_url(self):
-		url=self.cleaned_data['url'] 🧹🧹
-		valid_extensions=['jpg','jpeg']
+		url=self.cleaned_data['url']
+		valid_extensions=['jpg','jpeg','png']
 		extensions=url.rsplit('.',1)[1].lower()
-		if extensionsnot in valid_extensions: 🔬🔬
+		if extensions not in valid_extensions:
 			raise forms.ValidationError('the url does not'\
 										'match valid image extensions')
 		return url
